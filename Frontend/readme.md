@@ -49,13 +49,13 @@ In the gitlab UI, change the password of the root user and create a new reposito
 
 =======================================================================
 
-Retournez sur votre VM vagrant et crée un réseau docker "gitlab_default" :
+Return to your vagrant VM and create a docker network "gitlab_default" :
 ```shell
 docker network create gitlab_default
 ```
-Puis dans le fichier /etc/hosts rajoutez la ligne : "10.0.2.15 gitlab.example.com"
+Then in the /etc/hosts file add the line: "10.0.2.15 gitlab.example.com".
 
-Ensuite allez dans le dossier du projet python et exécutez les commandes suivantes :
+Then go to the python project folder and execute the following commands :
 ```shell
 git remote set-url origin http://gitlab.example.com/root/devops_project.git
 git push --all origin
@@ -63,7 +63,7 @@ git push --all origin
 
 =======================================================================
 
-Après crée les trois runners suivants :
+Afterwards, create the following three runners:
 ```shell
 docker exec -it gitlab-runner gitlab-runner register \
   --non-interactive \
@@ -93,32 +93,31 @@ docker exec -it gitlab-runner gitlab-runner register \
   --executor shell \
   --docker-network-mode gitlab_default \
 ```
-Remplacez {token} par votre propre token runner. Pour le trouver allez dans "Admin area" cliquez ensuite sur "Instances runner", cliquez sur les trois petits point
-et copiez votre token.
+Replace {token} with your own runner token. To find it, go to 'Admin area', then click on 'Instance runner', click on the three dots, and copy your token.
 
 =======================================================================
 
-Il va falloir que vous créez une VM EC2 dans AWS pour déployer l'application web.
-- Créez-vous un compte si ce n'est pas déjà fait
-- Allez dans EC2 et créez une instance
-- Choisissez pour OS Ubuntu
-- Puis créez la clé de sécurité suivante
+You will need to create an EC2 VM in AWS to deploy the web application.
+- Create an account if you haven't done so already.
+- Go to EC2 and create an instance.
+- Choose Ubuntu for the OS.
+- Then create the following security key.
  
 ![key](../images/key.png)
-- Dans votre groupe de sécurité rajoutez les régles suivantes
+- Add the following rules to your security group.
 
 ![gds](../images/gsp.png)
 
 =======================================================================
 
-Ensuite dans votre gitlab il faudra aller dans les settings de votre CI/CD puis dans "Variables" et rajoutez les variables :
-  - ```REGISTRY_PASS``` dans laquelle vous mettrez votre mot de passe de votre Docker Hub
-  - ```REGISTRY_USER``` dans laquelle vous mettrez votre nom d'utilisateur de votre Docker Hub
-  - ```SSH_PRIVATE_KEY``` dans laquelle vous mettrez votre clé ssh de votre VM EC2
+Then in your GitLab, you will need to go to the settings of your CI/CD, then into 'Variables', and add the following variables:
+  - ```REGISTRY_PASS``` where you will put your Docker Hub password
+  - ```REGISTRY_USER``` where you will put your Docker Hub username
+  - ```SSH_PRIVATE_KEY``` where you will put your EC2 VM's SSH private key
 
 =======================================================================
 
-Enfin allez dans votre projet gitlab "devops_project" et créez un fichier .gitlab-ci.yml et ajoutez-y le contenu suivant et remplacez {DNS public} par le DNS public de votre EC2 :
+Finally, go to your GitLab project 'devops_project' and create a .gitlab-ci.yml file. Add the following content to it, and replace {public DNS} with the public DNS of your EC2:
 
 ```yml
 variables:
@@ -177,7 +176,6 @@ deploy:
 
 =======================================================================
 
-
-Quand votre pipeline aura fini de s'exécuter connectez vous : {adresse IPv4 public de la VM EC2}:5000
+When your pipeline has finished executing, connect to: {public IPv4 address of the EC2 VM}:5000
 
 ***The configuration steps need to be done once since you don't destroy the VM***
