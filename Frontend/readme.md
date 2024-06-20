@@ -49,7 +49,10 @@ In the gitlab UI, change the password of the root user and create a new reposito
 
 =======================================================================
 
-Retournez sur votre VM vagrant et crée un réseau docker "gitlab_runner"
+Retournez sur votre VM vagrant et crée un réseau docker "gitlab_default" :
+```shell
+docker network create gitlab_default
+```
 Puis dans le fichier /etc/hosts rajoutez la ligne : "10.0.2.15 gitlab.example.com"
 
 Ensuite allez dans le dossier du projet python et exécutez les commandes suivantes :
@@ -65,7 +68,7 @@ Après crée les trois runners suivants :
 docker exec -it gitlab-runner gitlab-runner register \
   --non-interactive \
   --url http://gitlab.example.com \
-  --registration-token DzmBihnXFQzP9wu4m6if \
+  --registration-token {token} \
   --tag-list "pythonapp" \
   --executor docker \
   --docker-image python:3.9-slim-buster \
@@ -74,7 +77,7 @@ docker exec -it gitlab-runner gitlab-runner register \
 ```shell
 docker exec -it gitlab-runner gitlab-runner register \
   --url http://gitlab.example.com \   
-  --registration-token DzmBihnXFQzP9wu4m6if \   
+  --registration-token {token} \   
   --tag-list "dockerapp" \   
   --executor docker \   
   --docker-image docker:26.1 \   
@@ -85,7 +88,7 @@ docker exec -it gitlab-runner gitlab-runner register \
 ```shell
 docker exec -it gitlab-runner gitlab-runner register \
   --url http://gitlab.example.com \   
-  --registration-token DzmBihnXFQzP9wu4m6if \   
+  --registration-token {token} \   
   --tag-list "shellapp" \   
   --executor shell \
   --docker-network-mode gitlab_default \
@@ -99,17 +102,19 @@ Il va falloir que vous créez une VM EC2 dans AWS pour déployer l'application w
 - Créez-vous un compte si ce n'est pas déjà fait
 - Allez dans EC2 et créez une instance
 - Choisissez pour OS Ubuntu
-- Puis créez la clé de sécurité suivante\n
+- Puis créez la clé de sécurité suivante
+ 
 ![key](../images/key.png)
 - Dans votre groupe de sécurité rajoutez les régles suivantes
+
 ![gds](../images/gsp.png)
 
 =======================================================================
 
 Ensuite dans votre gitlab il faudra aller dans les settings de votre CI/CD puis dans "Variables" et rajoutez les variables :
-  - REGISTRY_PASS dans laquelle vous mettrez votre mot de passe de votre Docker Hub
-  - REGISTRY_USER dans laquelle vous mettrez votre nom d'utilisateur de votre Docker Hub
-  - SSH_PRIVATE_KEY dans laquelle vous mettrez votre clé ssh de votre VM EC2
+  - ```REGISTRY_PASS``` dans laquelle vous mettrez votre mot de passe de votre Docker Hub
+  - ```REGISTRY_USER``` dans laquelle vous mettrez votre nom d'utilisateur de votre Docker Hub
+  - ```SSH_PRIVATE_KEY``` dans laquelle vous mettrez votre clé ssh de votre VM EC2
 
 =======================================================================
 
