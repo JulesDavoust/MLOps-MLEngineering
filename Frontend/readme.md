@@ -1,21 +1,5 @@
 # DevOps Project
 
-## Objectives
-
-- [x] Setup your team tools
-- [x] Install Gitlab (with docker)
-- [ ] Find a web application
-- [ ] Configure a pipeline
-- [ ] Improve your network configuration
-  - [x] Add synchronized directories between the host and the VM
-  - [x] Configure port forwarding (ssh, http)
-  - [x] Connect to the VM with ssh client
-  - [ ] Trigger a pipeline with a curl from host and a second VM
-- [ ] Improve yout components in order to move forward
-  - [ ] Build a second docker and register as a runner
-  - [ ] Build a VM to deploy the app
-  - [ ] Customize your pipeline to build/test on the runner and deploy on the final VM
-
 ## Installation
 
 ### Configuration
