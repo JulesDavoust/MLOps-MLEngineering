@@ -247,7 +247,7 @@ if(st.session_state['page']=='Predictions'):
     elif(predict == 'Multiple values'):
         value = []
         nombre_pred = st.number_input('How many predictions do you want ?', min_value=1)
-        st.write('Enter your values (separate it with "," like this : 183.2,28) :')
+        st.write('Enter your values and click  on "Add value" :')
 
         df = pd.read_csv('cleaned_campaign_data.csv')
 
