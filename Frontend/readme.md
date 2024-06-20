@@ -93,12 +93,12 @@ et copiez votre token.
 =======================================================================
 
 Il va falloir que vous créez une VM EC2 dans AWS pour déployer l'application web.
-Créez-vous un compte si ce n'est pas déjà fait.
-Allez dans EC2 et créez une instance.
-Choisissez pour OS Ubuntu.
-Puis créez la clé de sécurité suivante :
+- Créez-vous un compte si ce n'est pas déjà fait
+- Allez dans EC2 et créez une instance
+- Choisissez pour OS Ubuntu
+- Puis créez la clé de sécurité suivante
   ![key](../images/key.png)
-Dans votre groupe de sécurité rajoutez les régles suivantes :
+- Dans votre groupe de sécurité rajoutez les régles suivantes
   ![gds](../images/gsp.png)
 
 =======================================================================
