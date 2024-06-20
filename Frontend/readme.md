@@ -96,7 +96,7 @@ Il va falloir que vous créez une VM EC2 dans AWS pour déployer l'application w
 - Créez-vous un compte si ce n'est pas déjà fait
 - Allez dans EC2 et créez une instance
 - Choisissez pour OS Ubuntu
-- Puis créez la clé de sécurité suivante
+- Puis créez la clé de sécurité suivante\n
 ![key](../images/key.png)
 - Dans votre groupe de sécurité rajoutez les régles suivantes
 ![gds](../images/gsp.png)
@@ -112,6 +112,7 @@ Ensuite dans votre gitlab il faudra aller dans les settings de votre CI/CD puis 
 
 Enfin allez dans votre projet gitlab "devops_project" et créez un fichier .gitlab-ci.yml et ajoutez-y le contenu suivant et remplacez {DNS public} par le DNS public de votre EC2 :
 
+```yml
 variables:
     IMAGE_NAME: julesdavoust/devops_project
     IMAGE_TAG: pythonapp-1.1
@@ -164,6 +165,7 @@ deploy:
           sudo docker ps -aq | xargs -r sudo docker stop &&
           sudo docker ps -aq | xargs -r sudo docker rm &&
           sudo docker run -d -p 5000:5000 $IMAGE_NAME:$IMAGE_TAG"
+```
 
 =======================================================================
 
