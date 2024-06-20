@@ -3,7 +3,7 @@
 ## Objective
 
 Objectives file :
-![objectives](2024-ST2DCD-PROJECT.docx)
+[objectives](2024-ST2DCD-PROJECT.docx)
 
 ## Installation
 
