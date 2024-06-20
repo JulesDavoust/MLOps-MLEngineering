@@ -1,6 +1,4 @@
-# Lab 1 - Gitlab pipeline
-
-![Lab 1 instructions](../images/lab1.png)
+# DevOps Project
 
 ## Objectives
 
