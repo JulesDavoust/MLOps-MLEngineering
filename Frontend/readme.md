@@ -53,14 +53,15 @@ Retournez sur votre VM vagrant et crée un réseau docker "gitlab_runner"
 Puis dans le fichier /etc/hosts rajoutez la ligne : "10.0.2.15 gitlab.example.com"
 
 Ensuite allez dans le dossier du projet python et exécutez les commandes suivantes :
-
+```shell
 git remote set-url origin http://gitlab.example.com/root/devops_project.git
 git push --all origin
+````
 
 =======================================================================
 
 Après crée les trois runners suivants :
-
+```shell
 docker exec -it gitlab-runner gitlab-runner register \
   --non-interactive \
   --url http://gitlab.example.com \
@@ -69,7 +70,8 @@ docker exec -it gitlab-runner gitlab-runner register \
   --executor docker \
   --docker-image python:3.9-slim-buster \
   --docker-network-mode gitlab_default
-
+```
+```shell
 docker exec -it gitlab-runner gitlab-runner register \
   --url http://gitlab.example.com \   
   --registration-token DzmBihnXFQzP9wu4m6if \   
@@ -79,14 +81,15 @@ docker exec -it gitlab-runner gitlab-runner register \
   --docker-network-mode gitlab_default \ 
   --docker-privileged true \ 
   --docker-volumes "/certs/client" \
-
+```
+```shell
 docker exec -it gitlab-runner gitlab-runner register \
   --url http://gitlab.example.com \   
   --registration-token DzmBihnXFQzP9wu4m6if \   
   --tag-list "shellapp" \   
   --executor shell \
   --docker-network-mode gitlab_default \
-
+```
 Remplacez {token} par votre propre token runner. Pour le trouver allez dans "Admin area" cliquez ensuite sur "Instances runner", cliquez sur les trois petits point
 et copiez votre token.
 
