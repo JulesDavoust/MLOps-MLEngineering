@@ -5,5 +5,5 @@ Déploiement en production d'un modèle de machine learning : L'objectif de ce p
 # Setup
 
 You have to start :
-- the API : python server.py
-- the frontend : streamlit run frontend.py
+- the API : python /API/app.py
+- the frontend : streamlit run /frontend/frontend.py
